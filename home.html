@@ -71,6 +71,34 @@
 </head>
 <body>
 
+<div id="navbar-container"></div>
+
+<script>
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-container').innerHTML = data;
+        });
+
+    function toggleMenu() {
+        var menu = document.getElementById("menu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    function logout() {
+        alert("คุณได้ออกจากระบบแล้ว!");
+        window.location.href = "home.html";
+    }
+
+    document.addEventListener("click", function(event) {
+        var menu = document.getElementById("menu");
+        var button = document.querySelector(".menu-btn");
+        if (menu && !menu.contains(event.target) && !button.contains(event.target)) {
+            menu.style.display = "none";
+        }
+    });
+</script>
+
   <div class="container">
     <Navbar />
     <h1 class="logo">
