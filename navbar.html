@@ -1,11 +1,14 @@
-<link rel="stylesheet" href="navbar.css">
-<div class="navbar">
+<nav class="navbar">
+    <div class="logo-container">
+        <img src="LOGO1.png" alt="Turbo Calculation Logo" class="logo">
+    </div>
     <button class="menu-btn" onclick="toggleMenu()">☰</button>
     <div class="menu" id="menu">
-        <a href="login.html">เข้าสู่ระบบ</a>
-        <a href="home.html">หน้าหลัก</a>
-        <button onclick="logout()">ออกจากระบบ</button>
-        <a href="score.html">คะแนนสะสม</a>
+        <ul>
+            <li><a href="login.html">เข้าสู่ระบบ</a></li>
+            <li><a href="home.html">หน้าหลัก</a></li>
+            <li><a href="#" onclick="logout()">ออกจากระบบ</a></li>
+            <li><a href="score.html">คะแนนสะสม</a></li>
+        </ul>
     </div>
-    <img src="LOGO1.png" alt="Logo" class="logo">
-</div>
+</nav>
