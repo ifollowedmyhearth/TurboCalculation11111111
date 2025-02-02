@@ -25,10 +25,7 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .column {
-      width: 50%;
+      flex-direction: column;
     }
 
     h2 {
@@ -63,33 +60,36 @@
 <body>
 
   <div class="container">
-    <!-- Left Column: Select Math Type -->
-    <div class="column">
-      <h2>เลือกประเภทโจทย์</h2>
-      <button class="btn btn-add" onclick="goToLevels('addition')">บวก</button>
-      <button class="btn btn-sub" onclick="goToLevels('subtraction')">ลบ</button>
-      <button class="btn btn-mul" onclick="goToLevels('multiplication')">คูณ</button>
-      <button class="btn btn-div" onclick="goToLevels('division')">หาร</button>
-    </div>
+    <!-- Select Math Type -->
+    <h2>เลือกประเภทโจทย์</h2>
+    <button class="btn btn-add" onclick="goToLevels('addition')">บวก</button>
+    <button class="btn btn-sub" onclick="goToLevels('subtraction')">ลบ</button>
+    <button class="btn btn-mul" onclick="goToLevels('multiple')">คูณ</button>
+    <button class="btn btn-div" onclick="goToLevels('division')">หาร</button>
 
-<script>
+    <!-- Select Level (Displayed when Math Type is selected) -->
+    <div id="levelSelection" style="display: none;">
+      <h2>เลือกเลเวลโจทย์</h2>
+      <button class="btn btn-level" onclick="startGame('1')">เลเวล 1</button>
+      <button class="btn btn-level" onclick="startGame('2')">เลเวล 2</button>
+      <button class="btn btn-level" onclick="startGame('3')">เลเวล 3</button>
+    </div>
+  </div>
+
+  <script>
     let currentType = '';
 
+    // Show level buttons based on math type
     function goToLevels(type) {
       currentType = type;
       document.getElementById("levelSelection").style.display = "block";
+    }
 
-      // Dynamically update the buttons for each math operation
-      let levelButtons = document.querySelectorAll('.btn-level');
-      
-      levelButtons.forEach(button => {
-        // Update the href to match the selected math type
-        let level = button.textContent.includes('1') ? '1' :
-                    button.textContent.includes('2') ? '2' : '3';
-        button.onclick = function() {
-          window.location.href = `${currentType}${level}.html`;
-        };
-      });
+    // Start game based on selected level
+    function startGame(level) {
+      alert("เริ่มโจทย์ระดับ " + level + " ประเภท " + currentType);
+      // Redirect to the specific game page for the selected operation and level
+      window.location.href = `${currentType}${level}.html`;
     }
   </script>
 
