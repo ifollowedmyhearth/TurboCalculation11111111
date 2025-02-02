@@ -1,0 +1,71 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Hamburger Button */
+.menu-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Menu Styling */
+.menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 150px;
+}
+
+.menu a, .menu button {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    background: white;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.menu a:hover, .menu button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Logo Styling */
+.logo {
+    height: 40px;
+}
+
+/* Responsive Navbar */
+@media (max-width: 600px) {
+    .navbar {
+        padding: 10px;
+    }
+    
+    .menu {
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+}
