@@ -72,23 +72,24 @@
       <button class="btn btn-div" onclick="goToLevels('division')">หาร</button>
     </div>
 
-    <!-- Right Column: Select Level (Hidden Initially) -->
-    <div class="column" id="levelSelection" style="display: none;">
-      <h2>เลือกเลเวลโจทย์</h2>
-      <button onclick="window.location.href='addition1.html' "startGame(1)">เลเวล 1</button>
-      <button onclick="window.location.href='addition2.html' "startGame(2)">เลเวล 2</button>
-      <button onclick="window.location.href='addition3.html' "startGame(3)">เลเวล 3</button>
-    </div>
-  </div>
+<script>
+    let currentType = '';
 
-  <script>
     function goToLevels(type) {
+      currentType = type;
       document.getElementById("levelSelection").style.display = "block";
-    }
 
-    function startGame(level) {
-      alert("เริ่มโจทย์ระดับ " + level);
-      // You can change this to load a real game page
+      // Dynamically update the buttons for each math operation
+      let levelButtons = document.querySelectorAll('.btn-level');
+      
+      levelButtons.forEach(button => {
+        // Update the href to match the selected math type
+        let level = button.textContent.includes('1') ? '1' :
+                    button.textContent.includes('2') ? '2' : '3';
+        button.onclick = function() {
+          window.location.href = `${currentType}${level}.html`;
+        };
+      });
     }
   </script>
 
