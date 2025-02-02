@@ -1,121 +1,72 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Turbo Calculation - หน้าแรก</title>
-  <link rel="stylesheet" href="navbar.css"> <!-- Ensure this file exists -->
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@200;700&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbo Calculation - หน้าแรก</title>
+    <link rel="stylesheet" href="navbar.css"> <!-- Navbar styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@200;700&display=swap');
 
-    body {
-      font-family: 'Sarabun', sans-serif;
-      text-align: center;
-      background-color: #b3ddf5;
-      padding: 20px;
-    }
+        body {
+            font-family: 'Sarabun', sans-serif;
+            text-align: center;
+            background-color: #b3ddf5;
+            padding: 20px;
+            margin: 0;
+        }
 
-    .container {
-      max-width: 350px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+        .container {
+            max-width: 350px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .logo {
-      font-size: 30px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
+        .start-button {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 700;
+            color: black;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(to right, #00c3ff, #ffff1c);
+            transition: 0.3s;
+        }
 
-    .logo span {
-      display: block;
-      font-size: 24px;
-    }
-
-    .turbo {
-      color: #ff4081;
-      font-weight: 700;
-    }
-
-    .calculation {
-      color: #3ab5ff;
-      font-weight: 700;
-    }
-
-    p {
-      font-size: 20px;
-      font-weight: 200;
-    }
-
-    .start-button {
-      display: inline-block;
-      font-size: 20px;
-      font-weight: 700;
-      color: black;
-      padding: 10px 20px;
-      margin-top: 20px;
-      border-radius: 25px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(to right, #00c3ff, #ffff1c);
-      transition: 0.3s;
-    }
-
-    .start-button:hover {
-      opacity: 0.8;
-    }
-  </style>
+        .start-button:hover {
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
 
-<!-- Load Navbar -->
-<div id="navbar-container"></div>
+    <!-- Import Navbar -->
+    <div id="navbar-container"></div>
 
-<!-- Fetch Navbar -->
-<script>
-    fetch('navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('navbar-container').innerHTML = data;
-        })
-        .catch(error => console.error("Error loading navbar:", error));
+    <div class="container">
+        <h1 class="logo-text">Turbo Calculation</h1>
+        <p>เรามาเริ่มฝึกทำโจทย์กัน</p>
+        <button class="start-button" onclick="startGame()">เริ่ม</button>
+    </div>
 
-    function toggleMenu() {
-        var menu = document.getElementById("menu");
-        if (menu) {
-            menu.style.display = menu.style.display === "block" ? "none" : "block";
+    <script>
+        // Load navbar from external file
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            });
+
+        function startGame() {
+            window.location.href = "math.html"; // Change this to the actual game page
         }
-    }
-
-    function logout() {
-        alert("คุณได้ออกจากระบบแล้ว!");
-        window.location.href = "index.html";
-    }
-
-    document.addEventListener("click", function(event) {
-        var menu = document.getElementById("menu");
-        var button = document.querySelector(".menu-btn");
-        if (menu && !menu.contains(event.target) && !button.contains(event.target)) {
-            menu.style.display = "none";
-        }
-    });
-</script>
-
-<!-- Page Content -->
-<div class="container">
-    <p>เรามาเริ่มฝึกทำโจทย์กัน</p>
-    <button class="start-button" onclick="startGame()">เริ่ม</button>
-</div>
-
-<!-- Start Game Function -->
-<script>
-    function startGame() {
-        window.location.href = "math.html"; // Make sure this page exists
-    }
-</script>
-
+    </script>
+    <script src="navbar.js"></script> <!-- Navbar script -->
 </body>
 </html>
