@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Turbo Calculation - หน้าแรก</title>
+  <link rel="stylesheet" href="navbar.css"> <!-- Ensure this file exists -->
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@200;700&display=swap');
 
@@ -66,28 +67,32 @@
     .start-button:hover {
       opacity: 0.8;
     }
-
   </style>
 </head>
 <body>
 
+<!-- Load Navbar -->
 <div id="navbar-container"></div>
 
+<!-- Fetch Navbar -->
 <script>
     fetch('navbar.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('navbar-container').innerHTML = data;
-        });
+        })
+        .catch(error => console.error("Error loading navbar:", error));
 
     function toggleMenu() {
         var menu = document.getElementById("menu");
-        menu.style.display = menu.style.display === "block" ? "none" : "block";
+        if (menu) {
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
     }
 
     function logout() {
         alert("คุณได้ออกจากระบบแล้ว!");
-        window.location.href = "home.html";
+        window.location.href = "index.html";
     }
 
     document.addEventListener("click", function(event) {
@@ -99,23 +104,18 @@
     });
 </script>
 
-  <div class="container">
-    <Navbar />
-    <h1 class="logo">
-      <span class="turbo">Turbo</span>
-      <span class="calculation">Calculation</span>
-    </h1>
-
+<!-- Page Content -->
+<div class="container">
     <p>เรามาเริ่มฝึกทำโจทย์กัน</p>
-
     <button class="start-button" onclick="startGame()">เริ่ม</button>
-  </div>
+</div>
 
-  <script>
+<!-- Start Game Function -->
+<script>
     function startGame() {
-      window.location.href = "math.html"; // Change this to the actual game page
+        window.location.href = "math.html"; // Make sure this page exists
     }
-  </script>
+</script>
 
 </body>
 </html>
