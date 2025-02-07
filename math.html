@@ -44,10 +44,10 @@
       cursor: pointer;
     }
 
-    .btn-add { background-color: #4CAF50; color: white; }
-    .btn-sub { background-color: #FF69B4; color: white; }
-    .btn-mul { background-color: #FFD700; color: black; }
-    .btn-div { background-color: #FF8C00; color: white; }
+    .btn-add { background-color: #000000 }
+    .btn-sub { background-color: #000000 }
+    .btn-mul { background-color: #000000 }
+    .btn-div { background-color: #000000 }
     
     .btn-level {
       background-color: #D8BFD8;
@@ -79,16 +79,14 @@
   <script>
     let currentType = '';
 
-    // Show level buttons based on math type
     function goToLevels(type) {
       currentType = type;
       document.getElementById("levelSelection").style.display = "block";
     }
 
-    // Start game based on selected level
     function startGame(level) {
       alert("เริ่มโจทย์ระดับ " + level + " ประเภท " + currentType);
-      // Redirect to the specific game page for the selected operation and level
+      
       window.location.href = `${currentType}${level}.html`;
     }
   </script>
