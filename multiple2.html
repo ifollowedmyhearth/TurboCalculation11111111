@@ -45,14 +45,14 @@
     </div>
 
     <script>
-    let questions = [];
-    let currentQuestion = 0;
-    let score = 0;
+        let questions = [];
+        let currentQuestion = 0;
+        let score = 0;
 
-    function generateQuestions() {
-        for (let i = 0; i < 10; i++) {
-            let num1 = Math.floor(Math.random() * 10);  // Numbers: 0-9
-            let num2 = Math.floor(Math.random() * 10);
+        function generateQuestions() {
+            for (let i = 0; i < 10; i++) {
+                let num1 = Math.floor(Math.random() * 90) + 10; // ตัวเลข 10 - 99
+                let num2 = Math.floor(Math.random() * 90) + 10; // ตัวเลข 10 - 99
 
             questions.push({ num1, num2, answer: num1 * num2 });
         }
