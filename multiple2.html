@@ -45,30 +45,26 @@
     </div>
 
     <script>
-        let questions = [];
-        let currentQuestion = 0;
-        let score = 0;
+    let questions = [];
+    let currentQuestion = 0;
+    let score = 0;
 
-        function generateQuestions() {
-            for (let i = 0; i < 10; i++) {
-                let num1 = Math.floor(Math.random() * 21);  // Moderate numbers: 0-20
-                let num2 = Math.floor(Math.random() * 21);
-                
-                if (num1 < num2) { 
-                    [num1, num2] = [num2, num1];
-                }
+    function generateQuestions() {
+        for (let i = 0; i < 10; i++) {
+            let num1 = Math.floor(Math.random() * 10);  // Numbers: 0-9
+            let num2 = Math.floor(Math.random() * 10);
 
-                questions.push({ num1, num2, answer: num1 + num2 });
-            }
-            showQuestion();
+            questions.push({ num1, num2, answer: num1 * num2 });
         }
+        showQuestion();
+    }
 
-        function showQuestion() {
-            document.getElementById("feedback").innerHTML = "";
-            document.getElementById("answer").value = "";
-            document.getElementById("question").innerHTML = `ข้อที่ ${currentQuestion + 1}: ${questions[currentQuestion].num1} + ${questions[currentQuestion].num2} = ?`;
-            document.getElementById("answer").focus();
-        }
+    function showQuestion() {
+        document.getElementById("feedback").innerHTML = "";
+        document.getElementById("answer").value = "";
+        document.getElementById("question").innerHTML = `ข้อที่ ${currentQuestion + 1}: ${questions[currentQuestion].num1} × ${questions[currentQuestion].num2} = ?`;
+        document.getElementById("answer").focus();
+    }
 
         function checkAnswer() {
             let userAnswer = parseInt(document.getElementById("answer").value);
