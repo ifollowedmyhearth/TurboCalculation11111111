@@ -43,9 +43,9 @@
         <p id="feedback"></p>
         <p id="score"></p>
     </div>
-
-    <script>
-     let questions = [];
+ 
+<script>
+    let questions = [];
     let currentQuestion = 0;
     let score = 0;
 
@@ -56,47 +56,47 @@
 
             questions.push({ num1, num2, answer: num1 * num2 });
         }
+        showQuestion();
+    }
+
+    function showQuestion() {
+        document.getElementById("feedback").innerHTML = "";
+        document.getElementById("answer").value = "";
+        document.getElementById("question").innerHTML = `ข้อที่ ${currentQuestion + 1}: ${questions[currentQuestion].num1} × ${questions[currentQuestion].num2} = ?`;
+        document.getElementById("answer").focus();
+    }
+
+    function checkAnswer() {
+        let userAnswer = parseInt(document.getElementById("answer").value);
+        let correctAnswer = questions[currentQuestion].answer;
+
+        if (userAnswer === correctAnswer) {
+            score += 10;
+            document.getElementById("feedback").innerHTML = "✅ ถูกต้อง!";
+        } else {
+            document.getElementById("feedback").innerHTML = `❌ ผิด! คำตอบที่ถูกคือ ${correctAnswer}`;
+        }
+
+        document.getElementById("score").innerHTML = `คะแนน: ${score} / 100`;
+        document.querySelector(".btn-submit").style.display = "none";
+        document.querySelector(".btn-next").style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+        currentQuestion++;
+        if (currentQuestion < 10) {
             showQuestion();
+            document.querySelector(".btn-submit").style.display = "inline-block";
+            document.querySelector(".btn-next").style.display = "none";
+        } else {
+            document.getElementById("question").innerHTML = "🎉 ทำแบบทดสอบเสร็จแล้ว!";
+            document.getElementById("answer").style.display = "none";
+            document.querySelector(".btn-next").style.display = "none";
         }
+    }
 
-        function showQuestion() {
-            document.getElementById("feedback").innerHTML = "";
-            document.getElementById("answer").value = "";
-            document.getElementById("question").innerHTML = `ข้อที่ ${currentQuestion + 1}: ${questions[currentQuestion].num1} + ${questions[currentQuestion].num2} = ?`;
-            document.getElementById("answer").focus();
-        }
-
-        function checkAnswer() {
-            let userAnswer = parseInt(document.getElementById("answer").value);
-            let correctAnswer = questions[currentQuestion].answer;
-
-            if (userAnswer === correctAnswer) {
-                score += 10;
-                document.getElementById("feedback").innerHTML = "✅ ถูกต้อง!";
-            } else {
-                document.getElementById("feedback").innerHTML = `❌ ผิด! คำตอบที่ถูกคือ ${correctAnswer}`;
-            }
-
-            document.getElementById("score").innerHTML = `คะแนน: ${score} / 100`;
-            document.querySelector(".btn-submit").style.display = "none";
-            document.querySelector(".btn-next").style.display = "inline-block";
-        }
-
-        function nextQuestion() {
-            currentQuestion++;
-            if (currentQuestion < 10) {
-                showQuestion();
-                document.querySelector(".btn-submit").style.display = "inline-block";
-                document.querySelector(".btn-next").style.display = "none";
-            } else {
-                document.getElementById("question").innerHTML = "🎉 ทำแบบทดสอบเสร็จแล้ว!";
-                document.getElementById("answer").style.display = "none";
-                document.querySelector(".btn-next").style.display = "none";
-            }
-        }
-
-        window.onload = generateQuestions;
-    </script>
+    window.onload = generateQuestions;
+</script>
 
 </body>
 </html>
