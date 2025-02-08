@@ -51,14 +51,14 @@
 
         function generateQuestions() {
             for (let i = 0; i < 5; i++) {
-                let divisor = Math.floor(Math.random() * 9) + 1; // 1-9
+                let divisor = Math.floor(Math.random() * 90) + 10; // 1-9
                 let quotient = Math.floor(Math.random() * 9) + 1; // 1-9
                 let dividend = divisor * quotient; // Ensures whole number result
                 questions.push({ dividend, divisor, answer: quotient });
             }
             for (let i = 0; i < 5; i++) {
-                let divisor = Math.floor(Math.random() * 90) + 10; // 10-99
-                let quotient = Math.floor(Math.random() * 9) + 1; // 1-9
+                let divisor = Math.floor(Math.random() * 90) + 10;
+                let quotient = Math.floor(Math.random() * 90) + 10;
                 let dividend = divisor * quotient;
                 questions.push({ dividend, divisor, answer: quotient });
             }
