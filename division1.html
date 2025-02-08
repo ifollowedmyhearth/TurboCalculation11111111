@@ -8,7 +8,7 @@
         body {
             font-family: 'Sarabun', sans-serif;
             text-align: center;
-            background-color: #ff9063;
+            background-color: #ffb84d;
             padding: 20px;
         }
         .container {
@@ -51,17 +51,12 @@
 
         function generateQuestions() {
             for (let i = 0; i < 10; i++) {
-                let num1 = Math.floor(Math.random() * 10) + 1; // ทำให้ num1 ไม่เป็น 0
-                let num2 = Math.floor(Math.random() * 10) + 1; // ทำให้ num2 ไม่เป็น 0
-                
-                // ตรวจสอบว่า num1 หารได้ลงตัวด้วย num2
-                while (num1 % num2 !== 0) {
-                    num1 = Math.floor(Math.random() * 10) + 1;
-                    num2 = Math.floor(Math.random() * 10) + 1;
-                }
-
-                questions.push({ num1, num2, answer: num1 / num2 });
+                let divisor = Math.floor(Math.random() * 9) + 1; 
+                let quotient = Math.floor(Math.random() * 9) + 1; 
+                let dividend = divisor * quotient;
+                questions.push({ dividend, divisor, answer: quotient });
             }
+            
             showQuestion();
         }
 
