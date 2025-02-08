@@ -50,9 +50,18 @@
         let score = 0;
 
         function generateQuestions() {
-            for (let i = 0; i < 10; i++) {
-                let num1 = Math.floor(Math.random() * 90) + 10; // ตัวเลข 10 - 99
-                let num2 = Math.floor(Math.random() * 90) + 10; // ตัวเลข 10 - 99
+            for (let i = 0; i < 5; i++) {
+                let num1 = Math.floor(Math.random() * 90) + 10; // 10-99
+                let num2 = Math.floor(Math.random() * 9) + 1; // 1-9
+                questions.push({ num1, num2, answer: num1 * num2 });
+            }
+
+            for (let i = 0; i < 5; i++) {
+                let num1 = Math.floor(Math.random() * 90) + 10; // 10-99
+                let num2 = Math.floor(Math.random() * 90) + 10; // 10-99
+                questions.push({ num1, num2, answer: num1 * num2 });
+            }
+        } 
 
             questions.push({ num1, num2, answer: num1 * num2 });
         }
