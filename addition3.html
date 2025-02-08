@@ -8,7 +8,7 @@
         body {
             font-family: 'Sarabun', sans-serif;
             text-align: center;
-            background-color: #06db74;
+            background-color: #27eb99;
             padding: 20px;
         }
         .container {
@@ -51,8 +51,8 @@
 
         function generateQuestions() {
             for (let i = 0; i < 10; i++) {
-                let num1 = Math.floor(Math.random() * 900) + 100; // ตัวเลข 100 - 999
-                let num2 = Math.floor(Math.random() * 900) + 100; // ตัวเลข 100 - 999
+                let num1 = Math.floor(Math.random() * 900) + 100;
+                let num2 = Math.floor(Math.random() * 900) + 100;
 
                 questions.push({ num1, num2, answer: num1 + num2 });
             }
