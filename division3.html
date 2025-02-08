@@ -8,7 +8,7 @@
         body {
             font-family: 'Sarabun', sans-serif;
             text-align: center;
-            background-color: #ff9063;
+            background-color: #ffb84d;
             padding: 20px;
         }
         .container {
@@ -34,7 +34,7 @@
 <body>
 
     <div class="container">
-        <h2>แบบทดสอบประเภทหาร level 3</h2>
+        <h2>แบบทดสอบประเภทหาร level 1</h2>
         <p id="question"></p>
         <input type="number" id="answer" />
         <br>
@@ -50,24 +50,26 @@
         let score = 0;
 
         function generateQuestions() {
-            for (let i = 0; i < 10; i++) {
-                let num1 = Math.floor(Math.random() * 100) + 1; // ขอบเขตเลขสูงขึ้นมาก
-                let num2 = Math.floor(Math.random() * 20) + 1;
-                
-                while (num1 % num2 !== 0) {
-                    num1 = Math.floor(Math.random() * 100) + 1;
-                    num2 = Math.floor(Math.random() * 20) + 1;
-                }
-
-                questions.push({ num1, num2, answer: num1 / num2 });
+            for (let i = 0; i < 5; i++) {
+                let divisor = Math.floor(Math.random() * 9) + 1; // 1-9
+                let quotient = Math.floor(Math.random() * 90) + 10; // 10-99
+                let dividend = divisor * quotient;
+                questions.push({ dividend, divisor, answer: quotient });
             }
+            for (let i = 0; i < 5; i++) {
+                let divisor = Math.floor(Math.random() * 90) + 10; // 10-99
+                let quotient = Math.floor(Math.random() * 90) + 10; // 10-99
+                let dividend = divisor * quotient;
+                questions.push({ dividend, divisor, answer: quotient });
+            }
+            
             showQuestion();
         }
 
         function showQuestion() {
             document.getElementById("feedback").innerHTML = "";
             document.getElementById("answer").value = "";
-            document.getElementById("question").innerHTML = `ข้อที่ ${currentQuestion + 1}: ${questions[currentQuestion].num1} ÷ ${questions[currentQuestion].num2} = ?`;
+            document.getElementById("question").innerHTML = `ข้อที่ ${currentQuestion + 1}: ${questions[currentQuestion].dividend} ÷ ${questions[currentQuestion].divisor} = ?`;
             document.getElementById("answer").focus();
         }
 
