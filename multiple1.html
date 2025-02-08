@@ -45,12 +45,11 @@
     </div>
  
 <script>
-        generateQuestions();
-    }
-
+    let questions = [];
+    let currentQuestion = 0;
+    let score = 0;
+    
     function generateQuestions() {
-        questions = [];
-
         for (let i = 0; i < 10; i++) {
                 let num1 = Math.floor(Math.random() * 9) + 1; // 1-9
                 let num2 = Math.floor(Math.random() * 9) + 1; // 1-9
