@@ -22,6 +22,13 @@ body {
   padding: 40px;
 }
 
+.img {
+  display: block;
+  margin: 0 auto; 
+  width: 240px;
+  height: 135px; 
+}
+
 .content p {
   font-size: 24px;
   color: #000000;
@@ -33,15 +40,26 @@ body {
   color: #d32f2f;
 }
 
-.button {
-  margin-top: 30px;
-  display: inline-block;
-  text-decoration: none;
-  background: linear-gradient(to right, #3F51B5, #FF4081);
-  color: white;
-  padding: 10px 20px;
-  font-size: 24px;
+.container {
+  max-width: 350px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
   border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.start-button {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
+  padding: 10px 80px;
+  margin-top: 20px;
+  border-radius: 80px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(to right, #00c3ff, #ffff1c);
   transition: 0.3s;
 }
 
