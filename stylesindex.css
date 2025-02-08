@@ -36,7 +36,8 @@ body {
 }
 
 .content h1 {
-  font-size: 36px;
+  font-size: 25px;
+  font-weight: 700;
   color: #000000;
 }
 
