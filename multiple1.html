@@ -8,7 +8,7 @@
         body {
             font-family: 'Sarabun', sans-serif;
             text-align: center;
-            background-color: #f5ec89;
+            background-color: #ffb84d;
             padding: 20px;
         }
         .container {
@@ -45,17 +45,49 @@
     </div>
  
 <script>
-    let questions = [];
-    let currentQuestion = 0;
-    let score = 0;
+        generateQuestions();
+    }
 
     function generateQuestions() {
-        for (let i = 0; i < 10; i++) {
-            let num1 = Math.floor(Math.random() * 10);  // Numbers: 0-9
-            let num2 = Math.floor(Math.random() * 10);
+        questions = [];
 
-            questions.push({ num1, num2, answer: num1 * num2 });
+        if (difficulty === 1) {
+            // Level 1: 1-digit × 1-digit
+            for (let i = 0; i < 10; i++) {
+                let num1 = Math.floor(Math.random() * 9) + 1; // 1-9
+                let num2 = Math.floor(Math.random() * 9) + 1; // 1-9
+                questions.push({ num1, num2, answer: num1 * num2 });
+            }
+        } 
+        else if (difficulty === 2) {
+            // Level 2: First 5 questions → 2-digit × 1-digit
+            for (let i = 0; i < 5; i++) {
+                let num1 = Math.floor(Math.random() * 90) + 10; // 10-99
+                let num2 = Math.floor(Math.random() * 9) + 1; // 1-9
+                questions.push({ num1, num2, answer: num1 * num2 });
+            }
+            // Next 5 questions → 2-digit × 2-digit
+            for (let i = 0; i < 5; i++) {
+                let num1 = Math.floor(Math.random() * 90) + 10; // 10-99
+                let num2 = Math.floor(Math.random() * 90) + 10; // 10-99
+                questions.push({ num1, num2, answer: num1 * num2 });
+            }
+        } 
+        else {
+            // Level 3: First 5 questions → 3-digit × 1-digit
+            for (let i = 0; i < 5; i++) {
+                let num1 = Math.floor(Math.random() * 900) + 100; // 100-999
+                let num2 = Math.floor(Math.random() * 9) + 1; // 1-9
+                questions.push({ num1, num2, answer: num1 * num2 });
+            }
+            // Next 5 questions → 3-digit × 2-digit
+            for (let i = 0; i < 5; i++) {
+                let num1 = Math.floor(Math.random() * 900) + 100; // 100-999
+                let num2 = Math.floor(Math.random() * 90) + 10; // 10-99
+                questions.push({ num1, num2, answer: num1 * num2 });
+            }
         }
+
         showQuestion();
     }
 
@@ -94,8 +126,6 @@
             document.querySelector(".btn-next").style.display = "none";
         }
     }
-
-    window.onload = generateQuestions;
 </script>
 
 </body>
