@@ -8,7 +8,7 @@
         body {
             font-family: 'Sarabun', sans-serif;
             text-align: center;
-            background-color: #f5ec89;
+            background-color: #f9e85b;
             padding: 20px;
         }
         .container {
@@ -50,9 +50,16 @@
         let score = 0;
 
         function generateQuestions() {
-            for (let i = 0; i < 10; i++) {
-                let num1 = Math.floor(Math.random() * 51);  // Hard numbers: 0-50
-                let num2 = Math.floor(Math.random() * 51);
+                       for (let i = 0; i < 5; i++) {
+                let num1 = Math.floor(Math.random() * 900) + 100; // 100-999
+                let num2 = Math.floor(Math.random() * 9) + 1; // 1-9
+                questions.push({ num1, num2, answer: num1 * num2 });
+            }
+
+            for (let i = 0; i < 5; i++) {
+                let num1 = Math.floor(Math.random() * 900) + 100; // 100-999
+                let num2 = Math.floor(Math.random() * 90) + 10; // 10-99
+                questions.push({ num1, num2, answer: num1 * num2 });
                 
                 if (num1 < num2) { 
                     [num1, num2] = [num2, num1];
