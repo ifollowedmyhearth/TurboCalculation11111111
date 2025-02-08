@@ -13,7 +13,7 @@
   <div class="content">
     <img src="LOGO2.png" alt="img" class="img">
     <p>เรามาเริ่มฝึกทำโจทย์กัน</p>
-    <a href="math.html" class="button">เริ่ม</a>
+    <button class="start-button" onclick="startGame()">เริ่ม</button>
   </div>
     <div class="about">
       <p>
@@ -26,4 +26,10 @@
     </div>
   </div>
 </body>
+
+  <script>
+        function startGame() {
+          window.location.href = "math.html"; // Change this to the actual game page
+        }
+  </script>
 </html>
