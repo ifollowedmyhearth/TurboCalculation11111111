@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบทดสอบประเภทคูณ level 3</title>
+    <title>แบบฝึกหัดประเภทคูณ level 3</title>
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
             text-align: center;
-            background-color: #f9e85b;
-            padding: 20px;
+            background: #f9e85b; 
         }
+        
         .container {
             background: white;
             padding: 20px;
@@ -29,28 +29,56 @@
         }
         .btn-submit { background-color: #28a745; color: white; }
         .btn-next { background-color: #007bff; color: white; }
+        .btn-home { background-color: #a8a8a8; color: white; }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            font-size: 16px;
+            padding: 10px;
+            width: 100px;
+            text-align: center;
+        }
+        
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h2>แบบทดสอบประเภทคูณ level 3</h2>
-        <p id="question"></p>
+        <h2>แบบฝึกหัดประเภทคูณ level 3</h2>
+        <p id="timer">⏳ เวลา: 0 วินาที</p>
+        <b1> </b1>
+        <p id="question">Loading...</p>
         <input type="number" id="answer" />
         <br>
         <button class="btn btn-submit" onclick="checkAnswer()">ส่งคำตอบ</button>
         <button class="btn btn-next" onclick="nextQuestion()" style="display: none;">ข้อต่อไป</button>
+        <button class="btn btn-home" onclick="goHome()">🏠 กลับหน้าแรก</button>
         <p id="feedback"></p>
-        <p id="score"></p>
+        <p id="score">คะแนน: 0 / 10</p>
     </div>
 
     <script>
         let questions = [];
         let currentQuestion = 0;
         let score = 0;
+        let time = 0;
+        let timerInterval;
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                time++;
+                document.getElementById("timer").innerText = `⏳ เวลา: ${time} วินาที`;
+            }, 1000);
+        }
 
         function generateQuestions() {
-                       for (let i = 0; i < 5; i++) {
+            questions = [];
+            for (let i = 0; i < 5; i++) {
                 let num1 = Math.floor(Math.random() * 900) + 100; // 100-999
                 let num2 = Math.floor(Math.random() * 9) + 1; // 1-9
                 questions.push({ num1, num2, answer: num1 * num2 });
@@ -60,54 +88,63 @@
                 let num1 = Math.floor(Math.random() * 900) + 100; // 100-999
                 let num2 = Math.floor(Math.random() * 90) + 10; // 10-99
                 questions.push({ num1, num2, answer: num1 * num2 });
-                
-                if (num1 < num2) { 
+         
+            if (num1 < num2) { 
                     [num1, num2] = [num2, num1];
                 }
-
-                questions.push({ num1, num2, answer: num1 * num2 });
+            
+            questions.push({ num1, num2, answer: num1 * num2 });
             }
+            
+            currentQuestion = 0;
+            score = 0;
+            time = 0;
+            document.getElementById("score").innerText = `คะแนน: ${score} / 10`;
             showQuestion();
+            startTimer();
         }
 
         function showQuestion() {
-            document.getElementById("feedback").innerHTML = "";
+            if (questions.length === 0) return;
+            document.getElementById("feedback").innerText = "";
             document.getElementById("answer").value = "";
-            document.getElementById("question").innerHTML = `ข้อที่ ${currentQuestion + 1}: ${questions[currentQuestion].num1} + ${questions[currentQuestion].num2} = ?`;
+            document.getElementById("question").innerText = `ข้อที่ ${currentQuestion + 1}: ${questions[currentQuestion].num1} * ${questions[currentQuestion].num2} = ?`;
             document.getElementById("answer").focus();
         }
 
         function checkAnswer() {
             let userAnswer = parseInt(document.getElementById("answer").value);
             let correctAnswer = questions[currentQuestion].answer;
-
-            if (userAnswer === correctAnswer) {
-                score += 10;
-                document.getElementById("feedback").innerHTML = "✅ ถูกต้อง!";
+            if (!isNaN(userAnswer) && userAnswer === correctAnswer) {
+                score++;
+                document.getElementById("feedback").innerText = "✅ ถูกต้อง!";
             } else {
-                document.getElementById("feedback").innerHTML = `❌ ผิด! คำตอบที่ถูกคือ ${correctAnswer}`;
+                document.getElementById("feedback").innerText = `❌ ผิด! คำตอบที่ถูกคือ ${correctAnswer}`;
             }
-
-            document.getElementById("score").innerHTML = `คะแนน: ${score} / 100`;
+            document.getElementById("score").innerText = `คะแนน: ${score} / 10`;
             document.querySelector(".btn-submit").style.display = "none";
             document.querySelector(".btn-next").style.display = "inline-block";
         }
 
         function nextQuestion() {
             currentQuestion++;
-            if (currentQuestion < 10) {
+            if (currentQuestion < questions.length) {
                 showQuestion();
                 document.querySelector(".btn-submit").style.display = "inline-block";
                 document.querySelector(".btn-next").style.display = "none";
             } else {
-                document.getElementById("question").innerHTML = "🎉 ทำแบบทดสอบเสร็จแล้ว!";
+                clearInterval(timerInterval);
+                document.getElementById("question").innerText = `🎉 ทำแบบทดสอบเสร็จแล้ว! ใช้เวลา ${time} วินาที`;
                 document.getElementById("answer").style.display = "none";
                 document.querySelector(".btn-next").style.display = "none";
             }
         }
 
+        function goHome() {
+            window.location.href = "math.html";
+        }
+
         window.onload = generateQuestions;
     </script>
-
 </body>
 </html>
