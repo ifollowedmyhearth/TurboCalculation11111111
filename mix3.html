@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบฝึกหัดโจทย์ระคน level 3</title>
+    <title>โจทย์ระคน level 3</title>
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
             text-align: center;
-            background: #27eb99; 
+            background: #86baff;
         }
         
         .container {
@@ -49,9 +49,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>แบบฝึกหัดโจทย์ระคน level 3</h2>
+        <h2>โจทย์ระคน level 3</h2>
         <p id="timer">⏳ เวลา: 0 วินาที</p>
-        <b1> </b1>
         <p id="question">Loading...</p>
         <input type="number" id="answer" />
         <br>
@@ -95,7 +94,7 @@
                     answer: 0
                 };
 
-                // Combine numbers with two operators
+                // Apply two operations between the numbers
                 if (operator1 === '+') {
                     if (operator2 === '+') {
                         question.answer = num1 + num2 + num3;
@@ -177,4 +176,24 @@
         }
 
         function nextQuestion() {
-            currentQues
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+                document.querySelector(".btn-submit").style.display = "inline-block";
+                document.querySelector(".btn-next").style.display = "none";
+            } else {
+                clearInterval(timerInterval);
+                document.getElementById("question").innerText = `🎉 ทำแบบทดสอบเสร็จแล้ว! ใช้เวลา ${time} วินาที`;
+                document.getElementById("answer").style.display = "none";
+                document.querySelector(".btn-next").style.display = "none";
+            }
+        }
+
+        function goHome() {
+            window.location.href = "math.html";
+        }
+
+        window.onload = generateQuestions;
+    </script>
+</body>
+</html>
