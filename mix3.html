@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบฝึกหัดโจทย์ระคน level 1</title>
+    <title>แบบฝึกหัดโจทย์ระคน level 3</title>
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
             text-align: center;
-            background: #86baff; 
+            background: #27eb99; 
         }
         
         .container {
@@ -49,7 +49,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>แบบฝึกหัดโจทย์ระคน level 1</h2>
+        <h2>แบบฝึกหัดโจทย์ระคน level 3</h2>
         <p id="timer">⏳ เวลา: 0 วินาที</p>
         <b1> </b1>
         <p id="question">Loading...</p>
@@ -82,28 +82,65 @@
                 let num1 = Math.floor(Math.random() * 20) + 1;
                 let num2 = Math.floor(Math.random() * 20) + 1;
                 let num3 = Math.floor(Math.random() * 20) + 1;
-                let operator = Math.floor(Math.random() * 4); // 0: +, 1: -, 2: *, 3: /
+                let operators = ['+', '-', '*', '/'];
+                let operator1 = operators[Math.floor(Math.random() * 4)];
+                let operator2 = operators[Math.floor(Math.random() * 4)];
 
                 let question = {
                     num1,
                     num2,
                     num3,
-                    operator,
+                    operator1,
+                    operator2,
                     answer: 0
                 };
 
-                if (operator === 0) {
-                    question.answer = num1 + num2;
-                } else if (operator === 1) {
-                    question.answer = num1 - num2;
-                } else if (operator === 2) {
-                    question.answer = num1 * num2;
-                } else if (operator === 3) {
-                    question.answer = Math.floor(num1 / num2);
+                // Combine numbers with two operators
+                if (operator1 === '+') {
+                    if (operator2 === '+') {
+                        question.answer = num1 + num2 + num3;
+                    } else if (operator2 === '-') {
+                        question.answer = num1 + num2 - num3;
+                    } else if (operator2 === '*') {
+                        question.answer = (num1 + num2) * num3;
+                    } else if (operator2 === '/') {
+                        question.answer = Math.floor((num1 + num2) / num3);
+                    }
+                } else if (operator1 === '-') {
+                    if (operator2 === '+') {
+                        question.answer = num1 - num2 + num3;
+                    } else if (operator2 === '-') {
+                        question.answer = num1 - num2 - num3;
+                    } else if (operator2 === '*') {
+                        question.answer = (num1 - num2) * num3;
+                    } else if (operator2 === '/') {
+                        question.answer = Math.floor((num1 - num2) / num3);
+                    }
+                } else if (operator1 === '*') {
+                    if (operator2 === '+') {
+                        question.answer = num1 * num2 + num3;
+                    } else if (operator2 === '-') {
+                        question.answer = num1 * num2 - num3;
+                    } else if (operator2 === '*') {
+                        question.answer = num1 * num2 * num3;
+                    } else if (operator2 === '/') {
+                        question.answer = Math.floor((num1 * num2) / num3);
+                    }
+                } else if (operator1 === '/') {
+                    if (operator2 === '+') {
+                        question.answer = Math.floor(num1 / num2) + num3;
+                    } else if (operator2 === '-') {
+                        question.answer = Math.floor(num1 / num2) - num3;
+                    } else if (operator2 === '*') {
+                        question.answer = Math.floor(num1 / num2) * num3;
+                    } else if (operator2 === '/') {
+                        question.answer = Math.floor(Math.floor(num1 / num2) / num3);
+                    }
                 }
 
                 questions.push(question);
             }
+
             currentQuestion = 0;
             score = 0;
             time = 0;
@@ -118,17 +155,7 @@
             document.getElementById("answer").value = "";
 
             let question = questions[currentQuestion];
-            let questionText = "";
-
-            if (question.operator === 0) {
-                questionText = `${question.num1} + ${question.num2} = ?`;
-            } else if (question.operator === 1) {
-                questionText = `${question.num1} - ${question.num2} = ?`;
-            } else if (question.operator === 2) {
-                questionText = `${question.num1} × ${question.num2} = ?`;
-            } else if (question.operator === 3) {
-                questionText = `${question.num1} ÷ ${question.num2} = ?`;
-            }
+            let questionText = `${question.num1} ${question.operator1} ${question.num2} ${question.operator2} ${question.num3} = ?`;
 
             document.getElementById("question").innerText = questionText;
             document.getElementById("answer").focus();
@@ -150,24 +177,4 @@
         }
 
         function nextQuestion() {
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
-                showQuestion();
-                document.querySelector(".btn-submit").style.display = "inline-block";
-                document.querySelector(".btn-next").style.display = "none";
-            } else {
-                clearInterval(timerInterval);
-                document.getElementById("question").innerText = `🎉 ทำแบบทดสอบเสร็จแล้ว! ใช้เวลา ${time} วินาที`;
-                document.getElementById("answer").style.display = "none";
-                document.querySelector(".btn-next").style.display = "none";
-            }
-        }
-
-        function goHome() {
-            window.location.href = "math.html";
-        }
-
-        window.onload = generateQuestions;
-    </script>
-</body>
-</html>
+            currentQues
