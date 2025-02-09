@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบฝึกหัดการหาร Level 2</title>
+    <title>แบบฝึกหัดประเภทหาร level 3</title>
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
             text-align: center;
-            background: #27eb99;
+            background-color: #ffb84d;
+            padding: 20px;
         }
-        
         .container {
             background: white;
             padding: 20px;
@@ -29,159 +29,81 @@
         }
         .btn-submit { background-color: #28a745; color: white; }
         .btn-next { background-color: #007bff; color: white; }
-        .btn-home { background-color: #a8a8a8; color: white; }
-
-        input[type="number"] {
-            -moz-appearance: textfield;
-            font-size: 16px;
-            padding: 10px;
-            width: 100px;
-            text-align: center;
-        }
-        
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h2>แบบฝึกหัดการหาร Level 2</h2>
-        <p id="timer">⏳ เวลา: 0 วินาที</p>
-        <p id="question">Loading...</p>
+        <h2>แบบฝึกหัดประเภทหาร level 3</h2>
+        <p id="question"></p>
         <input type="number" id="answer" />
         <br>
         <button class="btn btn-submit" onclick="checkAnswer()">ส่งคำตอบ</button>
         <button class="btn btn-next" onclick="nextQuestion()" style="display: none;">ข้อต่อไป</button>
-        <button class="btn btn-home" onclick="goHome()">🏠 กลับหน้าแรก</button>
         <p id="feedback"></p>
-        <p id="score">คะแนน: 0 / 10</p>
+        <p id="score"></p>
     </div>
 
     <script>
         let questions = [];
         let currentQuestion = 0;
         let score = 0;
-        let time = 0;
-        let timerInterval;
-
-        function startTimer() {
-            timerInterval = setInterval(() => {
-                time++;
-                document.getElementById("timer").innerText = `⏳ เวลา: ${time} วินาที`;
-            }, 1000);
-        }
 
         function generateQuestions() {
-            questions = [];
-            // Level 2: 2 questions for 2 digit divide 1 digit
-            for (let i = 0; i < 2; i++) {
-                let num1 = Math.floor(Math.random() * 90) + 10;  // 10-99
-                let num2 = Math.floor(Math.random() * 9) + 1;    // 1-9
-                questions.push({ num1, num2, type: 'double1', answer: num1 / num2 });
+            for (let i = 0; i < 5; i++) {
+                let divisor = Math.floor(Math.random() * 9) + 1; // 1-9
+                let quotient = Math.floor(Math.random() * 900) + 100; // 109-999
+                let dividend = divisor * quotient;
+                questions.push({ dividend, divisor, answer: quotient });
             }
-
-            // Level 2: 3 questions for 2 digit divide 2 digit
-            for (let i = 0; i < 3; i++) {
-                let num1 = Math.floor(Math.random() * 90) + 10;  // 10-99
-                let num2 = Math.floor(Math.random() * 90) + 10;  // 10-99
-                questions.push({ num1, num2, type: 'double2', answer: num1 / num2 });
+            for (let i = 0; i < 5; i++) {
+                let divisor = Math.floor(Math.random() * 90) + 10; // 10-99
+                let quotient = Math.floor(Math.random() * 900) + 100; // 100-999
+                let dividend = divisor * quotient;
+                questions.push({ dividend, divisor, answer: quotient });
             }
-
-            // Level 2: 3 questions for 2 digit divide 1 digit with remainder
-            for (let i = 0; i < 3; i++) {
-                let num1 = Math.floor(Math.random() * 90) + 10;  // 10-99
-                let num2 = Math.floor(Math.random() * 9) + 1;    // 1-9
-                let remainder = num1 % num2;
-                questions.push({ num1, num2, type: 'remainder1', answer: Math.floor(num1 / num2), remainder: remainder });
-            }
-
-            // Level 2: 2 questions for 2 digit divide 2 digit with remainder
-            for (let i = 0; i < 2; i++) {
-                let num1 = Math.floor(Math.random() * 90) + 10;  // 10-99
-                let num2 = Math.floor(Math.random() * 90) + 10;  // 10-99
-                let remainder = num1 % num2;
-                questions.push({ num1, num2, type: 'remainder2', answer: Math.floor(num1 / num2), remainder: remainder });
-            }
-
-            currentQuestion = 0;
-            score = 0;
-            time = 0;
-            document.getElementById("score").innerText = `คะแนน: ${score} / 10`;
+            
             showQuestion();
-            startTimer();
         }
 
         function showQuestion() {
-            if (questions.length === 0) return;
-            document.getElementById("feedback").innerText = "";
+            document.getElementById("feedback").innerHTML = "";
             document.getElementById("answer").value = "";
-            let question = questions[currentQuestion];
-            let questionText = '';
-            
-            if (question.type === 'double1') {
-                questionText = `${question.num1} ÷ ${question.num2} = ?`;
-            } else if (question.type === 'double2') {
-                questionText = `${question.num1} ÷ ${question.num2} = ?`;
-            } else if (question.type === 'remainder1') {
-                questionText = `${question.num1} ÷ ${question.num2} = ? (กรุณากรอกค่าผลหารและเศษ)`;
-            } else if (question.type === 'remainder2') {
-                questionText = `${question.num1} ÷ ${question.num2} = ? (กรุณากรอกค่าผลหารและเศษ)`;
-            }
-
-            document.getElementById("question").innerText = `ข้อที่ ${currentQuestion + 1}: ${questionText}`;
+            document.getElementById("question").innerHTML = `ข้อที่ ${currentQuestion + 1}: ${questions[currentQuestion].dividend} ÷ ${questions[currentQuestion].divisor} = ?`;
             document.getElementById("answer").focus();
         }
 
         function checkAnswer() {
-            let userAnswer = parseInt(document.getElementById("answer").value);
-            let correctAnswer = Math.floor(questions[currentQuestion].answer);
-            let remainder = questions[currentQuestion].remainder;
+            let userAnswer = parseFloat(document.getElementById("answer").value);
+            let correctAnswer = questions[currentQuestion].answer;
 
-            if (questions[currentQuestion].type === 'remainder1' || questions[currentQuestion].type === 'remainder2') {
-                let userRemainder = parseInt(prompt(`กรุณากรอกเศษสำหรับข้อที่ ${currentQuestion + 1}:`));
-                if (userAnswer === correctAnswer && userRemainder === remainder) {
-                    score++;
-                    document.getElementById("feedback").innerText = "✅ ถูกต้อง!";
-                } else {
-                    document.getElementById("feedback").innerText = `❌ ผิด! คำตอบที่ถูกคือ ผลหาร: ${correctAnswer} เศษ: ${remainder}`;
-                }
+            if (userAnswer === correctAnswer) {
+                score += 10;
+                document.getElementById("feedback").innerHTML = "✅ ถูกต้อง!";
             } else {
-                if (userAnswer === correctAnswer) {
-                    score++;
-                    document.getElementById("feedback").innerText = "✅ ถูกต้อง!";
-                } else {
-                    document.getElementById("feedback").innerText = `❌ ผิด! คำตอบที่ถูกคือ ${correctAnswer}`;
-                }
+                document.getElementById("feedback").innerHTML = `❌ ผิด! คำตอบที่ถูกคือ ${correctAnswer}`;
             }
 
-            document.getElementById("score").innerText = `คะแนน: ${score} / 10`;
+            document.getElementById("score").innerHTML = `คะแนน: ${score} / 100`;
             document.querySelector(".btn-submit").style.display = "none";
             document.querySelector(".btn-next").style.display = "inline-block";
         }
 
         function nextQuestion() {
             currentQuestion++;
-            if (currentQuestion < questions.length) {
+            if (currentQuestion < 10) {
                 showQuestion();
                 document.querySelector(".btn-submit").style.display = "inline-block";
                 document.querySelector(".btn-next").style.display = "none";
             } else {
-                clearInterval(timerInterval);
-                document.getElementById("question").innerText = `🎉 ทำแบบทดสอบเสร็จแล้ว! ใช้เวลา ${time} วินาที`;
+                document.getElementById("question").innerHTML = "🎉 ทำแบบทดสอบเสร็จแล้ว!";
                 document.getElementById("answer").style.display = "none";
                 document.querySelector(".btn-next").style.display = "none";
             }
         }
 
-        function goHome() {
-            window.location.href = "math.html";
-        }
-
         window.onload = generateQuestions;
     </script>
+
 </body>
 </html>
